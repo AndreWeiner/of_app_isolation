@@ -1,0 +1,10 @@
+FROM openfoamplus/of_v1906_centos73
+# copy app source code to base image
+COPY dummyFoam /opt/OpenFOAM/OpenFOAM-v1906/applications/solvers/dummyFoam
+# change working directory
+WORKDIR /opt/OpenFOAM/OpenFOAM-v1906/applications/solvers/dummyFoam
+# source environment variables, compile, and create execution script
+RUN source /opt/OpenFOAM/OpenFOAM-v1906/etc/bashrc && \
+    wmake && \
+    mkdir /case && \
+    echo "source /opt/OpenFOAM/OpenFOAM-v1906/etc/bashrc &> /dev/null; dummyFoam -case /case" > /runDummyFoam.sh

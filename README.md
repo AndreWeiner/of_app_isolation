@@ -1,4 +1,4 @@
-# Isolate a single OpenFOAM&reg; in a Docker image
+# Isolate a single OpenFOAM&reg; app in a Docker image
 
 ## Introduction
 
@@ -12,6 +12,7 @@ This repository contains a Dockerfile which creates a Docker image containing on
 For more information, check out this blog post (to be linked).
 
 ## Usage
+
 Copy this repository:
 ```
 git clone https://github.com/AndreWeiner/of_app_isolation
@@ -25,7 +26,12 @@ Build the Docker image and tag it with the latest commit hash of *dummyFoam*:
 ```
 docker build -t andreweiner/dummy_foam:$(git --git-dir dummyFoam/.git log -1 --format=%h) .
 ```
-Navigate to a case directory and run the container:
+For comparison, you can also build the app without using multistage-builds.
+```
+docker build -t andreweiner/dummy_foam:$(git --git-dir dummyFoam/.git log -1 --format=%h) -f Dockerfile.single .
+```
+
+To test the app, navigate to a case directory and run the container:
 ```
 cd /path/to/some/openfoam/case
 docker container run -it -v"$PWD:/case" \
