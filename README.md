@@ -4,7 +4,7 @@
 
 This repository contains a Dockerfile which creates a Docker image containing only a single application and its dependencies. The [multistage build](https://docs.docker.com/develop/develop-images/multistage-build/) works as follows:
 
-1. [OpenFOAM-v1906](https://hub.docker.com/r/openfoamplus/of_v1906_centos73) is used as base image (the image is a containerized build environment)
+1. [OpenFOAM-v1912](https://hub.docker.com/r/openfoamplus/of_v1912_centos73) is used as base image (the image is a containerized build environment)
 2. the source code of some [dummy application](https://github.com/AndreWeiner/dummyFoam) is copied onto the image and built
 3. the application's dependencies are packed in *tar* balls
 4. application + dependencies are copied to a new image
