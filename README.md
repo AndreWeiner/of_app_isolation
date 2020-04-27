@@ -31,18 +31,19 @@ For comparison, you can also build the app without using multistage-builds.
 docker build -t andreweiner/dummy_foam:$(git --git-dir dummyFoam/.git log -1 --format=%h) -f Dockerfile.single .
 ```
 
-To test the app, navigate to a case directory and run the container:
+To test the app, navigate to some arbitrary (but valid) OpenFOAM case directory and run the container:
 ```
-cd /path/to/some/openfoam/case
+# choose any other valid OpenFOAM case
+cd ~/OpenFOAM/andre-v1912/run/tutorials/basic/laplacianFoam/flange/
 docker container run -it -v"$PWD:/case" \
-andreweiner/dummy_foam:f2fbf95 /bin/bash /runDummyFoam.sh
+andreweiner/dummy_foam:06ff344 /bin/bash /runDummyFoam.sh
 ```
 You can also forward the solver output to a log file:
 ```
 docker container run -it -v"$PWD:/case" \
-andreweiner/dummy_foam:f2fbf95 /bin/bash /runDummyFoam.sh > log.dummyFoam
+andreweiner/dummy_foam:06ff344 /bin/bash /runDummyFoam.sh > log.dummyFoam
 ```
-The solver output should look like:
+The only thing the *dummyFoam* solver does is to set a root case and to create a runtime object. The solver output should look as follows:
 ```
 ...
 Create time
